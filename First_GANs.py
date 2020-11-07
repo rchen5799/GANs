@@ -20,4 +20,22 @@ class GAN():
         self.img_shape = (self.img_rows, self.img_cols, self.channels)
         self.latent_dim = 100 #Dimensions
     
-    optimizer = Adam(0.0002, 0.5) #This is our optimizer!
+        optimizer = Adam(0.0002, 0.5) #This is our optimizer!
+
+        self.discriminator = self.build_discriminator()
+
+        self.discriminator.compile(loss='binary_crossentropy', optimizer=optimizer, metrics=['accuracy'])
+
+        self.generator = self.build_generator()
+
+        z = Input(shape = (self.latent_dim,))
+        img = self.generator(z)
+
+        self.discriminator.trainable = False
+
+        validity - self.discriminator(img)
+
+        self.combined = Model(z, validity)
+        self.combined.compile(loss='binary_crossentropy', optimizer=optimizer)
+
+
