@@ -33,7 +33,7 @@ class GAN():
 
         self.discriminator.trainable = False
 
-        validity - self.discriminator(img)
+        validity = self.discriminator(img)
 
         self.combined = Model(z, validity)
         self.combined.compile(loss='binary_crossentropy', optimizer=optimizer)
