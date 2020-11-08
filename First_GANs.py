@@ -38,4 +38,9 @@ class GAN():
         self.combined = Model(z, validity)
         self.combined.compile(loss='binary_crossentropy', optimizer=optimizer)
 
-
+    def build_generator(self):
+        model = Sequential()
+        model.add(Dense(256, input_dim=self.latent_dim)
+        model.add(BatchNormalization(momentum = 0.8))
+        model.add(Dense(512))
+        model.add(LeakyReLU(alpha = 0.2))
