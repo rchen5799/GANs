@@ -54,4 +54,9 @@ class GAN():
 
         model.summary()
 
+        noise = Input(shape=(self.latent_dim,))
+        img = model(noise)
+
+        return Model(noise, img)
+
         
