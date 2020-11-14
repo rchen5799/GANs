@@ -70,4 +70,8 @@ class GAN():
         model.add(Dense(1, activation='sigmoid'))
         model.summary()
 
+        img = Input(shape=self.img_shape)
+        validity = model(img)
+
+        return Model(img, validity)
         
