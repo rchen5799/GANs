@@ -74,4 +74,11 @@ class GAN():
         validity = model(img)
 
         return Model(img, validity)
+
+    def train(self, epochs, batch_size=128, sample_interval=50):
+        (X_train, _), (_, _) = mnist.load_data()
+        X_train = X_train / 127.5 - 1.
+        X_train = np.expand_dims(X_train, axis=3)
+        valid = np.ones((batch_size, 1))
+        fake = np.zeros((batch_size, 1))
         
