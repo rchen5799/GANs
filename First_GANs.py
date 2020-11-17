@@ -81,4 +81,13 @@ class GAN():
         X_train = np.expand_dims(X_train, axis=3)
         valid = np.ones((batch_size, 1))
         fake = np.zeros((batch_size, 1))
+
+        for epoch in range(epochs):
+            idx = np.random.randint(0, X_train.shape[0], batch_size)
+            imgs = X_train[idx]
+            noise = np.random.normal(0, 1, (batch_size, self.latent_dim))
+            gen_imgs = self.generator.predict(noise)
+            d_loss_real = self.discriminator.train_on_batch(imgs, valid)
+            d_loss_fake = self.discriminator.train_on_batch(gen_imgs, fake)
+            d_loss = 0.5 * np.add(d_loss_real, d_loss_fake)
         
