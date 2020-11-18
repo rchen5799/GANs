@@ -90,4 +90,10 @@ class GAN():
             d_loss_real = self.discriminator.train_on_batch(imgs, valid)
             d_loss_fake = self.discriminator.train_on_batch(gen_imgs, fake)
             d_loss = 0.5 * np.add(d_loss_real, d_loss_fake)
+    
+    def sample_images(self, epoch):
+        r, c = 5, 5
+        noise = np.random.normal(0, 1, (r * c, self.latent_dim))
+        gen_imgs = self.generator.predict(noise)
+        gen_imgs = 0.5 * gen_imgs + 0.5
         
