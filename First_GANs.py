@@ -41,6 +41,7 @@ class GAN():
     def build_generator(self):
         model = Sequential()
 
+        #TODO: Understand what each of the filters do for GANs
         model.add(Dense(256, input_dim=self.latent_dim))
         model.add(BatchNormalization(momentum = 0.8))
         model.add(Dense(512))
@@ -62,6 +63,7 @@ class GAN():
     def build_discriminator(self):
         model = Sequential()
 
+        #TODO: Understand this portion of why these parameters were used!!
         model.add(Flatten(input_shape=self.img_shape))
         model.add(Dense(512))
         model.add(LeakyReLU(alpha=0.2))
@@ -83,6 +85,7 @@ class GAN():
         fake = np.zeros((batch_size, 1))
 
         for epoch in range(epochs):
+            #TODO: Understand the batches
             idx = np.random.randint(0, X_train.shape[0], batch_size)
             imgs = X_train[idx]
             noise = np.random.normal(0, 1, (batch_size, self.latent_dim))
